@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Empresa extends Model
+class Cliente extends Model
 {
     use HasFactory;
-//aqui se autorizan los campos que fueron validados
-//que columnas permite ingresar datos
-protected $fillable= [
+///agregar primero aqui antes de trabjar con el store
+    protected $fillable= [
         'nombre',
+        'apellido',
         'ruc',
         'razon_social',
+        'email',
+        'fecha_nacimiento',
         'direccion',
         'telefono'
 ];

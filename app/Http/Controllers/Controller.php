@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+    protected $respuesta_exitosa = "Respuesta exitosa";
 
     public function get_response($message, $estado, $data)
     {

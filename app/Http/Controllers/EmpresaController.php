@@ -77,7 +77,7 @@ protected $respuesta_error = "Ocurrio un error inesperado, consulte con soporte"
 
 
     /**
-     * Display the specified resource.
+     * Display the specified resource. Sirve para buscar por el numero de id
      */
     public function show(string $id)
 {
