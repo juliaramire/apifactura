@@ -99,7 +99,37 @@ class ClienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+            $data = $request->validate([
+                'nombre' => 'required|string|max:50',
+                'apellido' => 'required|string|max:60',
+                'ruc' => 'required|string',
+                'razon_social' => 'required|string|max:100',
+                'email' => 'nullable|string',
+                'fecha_nacimiento' => 'nullable|string',
+                'direccion' => 'nullable|string|max:255',
+                'telefono' => 'nullable|string|max:255'
+            ]);
+
+            $cliente = Cliente::findOrFail($id);
+            $cliente->update($data);
+
+            return response()->json(
+                $this->get_response(
+                    $this->respuesta_exitosa,
+                    200,
+                    $cliente
+                )
+            );
+
+        }catch(Exception $e){
+            return $this ->get_response(
+                $e->getMessage(),
+                503,
+                []
+            );
+
+        }
     }
 
     /**
@@ -107,6 +137,27 @@ class ClienteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+
+            $cliente = Cliente::findOrFail($id);
+            $cliente->delete();
+
+            return response()->json(
+                $this->get_response(
+                    "Eliminado correctamente".$id,
+                    200,
+                    $cliente
+                )
+            );
+
+        }catch(Exception $e){
+            //simpre se debe ertornar, o queda de forma infitnita
+            return $this ->get_response(
+                $e->getMessage(),
+                503,
+                []
+            );
+
+        }
     }
 }
